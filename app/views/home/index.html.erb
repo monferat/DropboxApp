@@ -1,0 +1,17 @@
+<div class="container-fluid">
+<header>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-between">
+      <% if user_signed_in? %>
+          <li><%= current_user.name %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+          <div><%= link_to "Sign in", new_user_session_path %></div>
+          <div><%= link_to "Sign up", new_user_registration_path %></div>
+          <div><%= link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path %></div>
+          <div><%= link_to "Sign up with Twitter", user_twitter_omniauth_authorize_path %></div>
+      <% end %>
+    </div>
+  </nav>
+</header>
+</div>
