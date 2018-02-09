@@ -1,17 +1,24 @@
-<div class="container-fluid">
-<header>
-  <nav class="navbar navbar-light">
+  <div class="container-fluid">
       <% if user_signed_in? %>
+      <header>
+        <nav class="navbar navbar-light">
           <div><%= current_user.name %></div>
           <div><%= current_user.email %></div>
           <div><%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary" %></div>
           <div><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-primary" %></div>
+        </nav>
+      </header>
+
+      <%= render 'home/main'%>
+
       <% else %>
-          <div><%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %></div>
-          <div><%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary" %></div>
-          <div><%= link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %></div>
-          <div><%= link_to "Sign up with Twitter", user_twitter_omniauth_authorize_path, class: "btn btn-primary" %></div>
+        <header>
+          <nav class="navbar navbar-light">
+            <div><%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %></div>
+            <div><%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary" %></div>
+            <div><%= link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %></div>
+            <div><%= link_to "Sign up with Twitter", user_twitter_omniauth_authorize_path, class: "btn btn-primary" %></div>
+          </nav>
+        </header>
       <% end %>
-  </nav>
-</header>
-</div>
+  </div>

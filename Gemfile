@@ -38,10 +38,12 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped', branch: 'bootstrap4'
 
 gem 'devise'
+gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'figaro'
+
+gem 'has_friendship'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
