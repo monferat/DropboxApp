@@ -4,6 +4,7 @@
       <% if user_signed_in? %>
           <div><%= current_user.name %></div>
           <div><%= current_user.email %></div>
+          <div><%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary" %></div>
           <div><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-primary" %></div>
       <% else %>
           <div><%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %></div>
