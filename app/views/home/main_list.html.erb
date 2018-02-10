@@ -7,7 +7,7 @@
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Provider</th>
+        <th scope="col">Requests</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +16,12 @@
           <tr>
             <td><%= f.name %></td>
             <td><%= f.email %></td>
-            <td><%= f.provider %></td>
+            <td><%= link_to 'Send friend request',
+                        friend_request_path(value: f.name),
+                        remote: true,
+                        method: :post,
+                        id: 'friend-request-btn',
+                        class: 'btn btn-secondary' %></td>
           </tr>
         <% end %>
       <% end %>

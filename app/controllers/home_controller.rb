@@ -22,6 +22,13 @@ class HomeController < ApplicationController
     end
   end
 
+  def friend_request
+    @name = params[:value]
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def set_user
