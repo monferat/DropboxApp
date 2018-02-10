@@ -1,29 +1,15 @@
 class HomeController < ApplicationController
-  before_action :set_user, :authenticate_user!
+  before_action :set_user, :set_user_id, :authenticate_user!
 
   def index
-  end
-
-  def main_list
     @users = User.all
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def friends_list
     @user_friends = @user.friends
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @requested_friends = @user.requested_friends
+    @pending_friends = @user.pending_friends
   end
 
   def friend_request
-    @name = params[:value]
+
     respond_to do |format|
       format.js
     end
@@ -33,6 +19,12 @@ class HomeController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def set_user_id
+    unless params[:id].nil?
+      @id = params[:id]
+    end
   end
 
 end

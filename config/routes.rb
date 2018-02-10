@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  get 'main_list', to: 'home#main_list'
-  get 'friends_list', to: 'home#friends_list'
-
   post 'friend_request', to: 'home#friend_request'
 
   devise_for :users, controllers: {

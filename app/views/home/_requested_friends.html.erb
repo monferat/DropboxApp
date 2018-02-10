@@ -1,0 +1,22 @@
+<main role="main">
+  <div class="users-title">
+    <h2>Requested Friends</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% unless @requested_friends.empty? %>
+        <% @requested_friends.each do |f| %>
+          <tr>
+            <td><%= f.name %></td>
+            <td><%= f.email %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</main>

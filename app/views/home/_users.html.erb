@@ -16,12 +16,16 @@
           <tr>
             <td><%= f.name %></td>
             <td><%= f.email %></td>
+            <% unless check_friendship?(f.id) %>
             <td><%= link_to 'Send friend request',
-                        friend_request_path(value: f.name),
+                        friend_request_path(id: f.id),
                         remote: true,
                         method: :post,
-                        id: 'friend-request-btn',
+                        id: "friend-request-btn-#{f.id}",
                         class: 'btn btn-secondary' %></td>
+            <% else %>
+                <td><div class="btn btn-success">Friend</div></td>
+            <% end %>
           </tr>
         <% end %>
       <% end %>
