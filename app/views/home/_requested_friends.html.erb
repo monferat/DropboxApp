@@ -6,6 +6,7 @@
     <thead>
       <tr>
         <th scope="col">Name</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -13,19 +14,23 @@
         <% @requested_friends.each do |f| %>
           <tr class =<%="friend-#{f.id}"%>>
             <td><%= f.name %></td>
-            <td><%= link_to 'Accept',
+            <td><div class="accept">
+                  <%= link_to 'Accept',
                             accept_friend_request_path(value: 'accept', id: f.id),
                             remote: true,
                             method: :put,
                             id: "accept-request-btn-#{f.id}",
                             class: 'btn btn-success' %>
-            </td>
-            <td><%= link_to 'Decline',
+                </div>
+
+                <div>
+                  <%= link_to 'Decline',
                             accept_friend_request_path(value: 'decline', id: f.id),
                             remote: true,
                             method: :put,
                             id: "decline-request-btn-#{f.id}",
                             class: 'btn btn-danger' %>
+                </div>
             </td>
           </tr>
         <% end %>

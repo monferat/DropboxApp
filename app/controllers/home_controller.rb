@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   before_action :set_user, :set_user_id, :authenticate_user!
 
   def index
-    @users = User.all
-    @users.delete(@user)
+    all_users = User.all
+    @users = all_users.without(@user)
     @user_friends = @user.friends
     @requested_friends = @user.requested_friends
     @pending_friends = @user.pending_friends
