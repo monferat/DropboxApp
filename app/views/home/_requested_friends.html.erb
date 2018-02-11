@@ -11,9 +11,22 @@
     <tbody>
       <% unless @requested_friends.empty? %>
         <% @requested_friends.each do |f| %>
-          <tr>
+          <tr class =<%="friend-#{f.id}"%>>
             <td><%= f.name %></td>
-            <td><%= f.email %></td>
+            <td><%= link_to 'Accept',
+                            accept_friend_request_path(value: 'accept', id: f.id),
+                            remote: true,
+                            method: :put,
+                            id: "accept-request-btn-#{f.id}",
+                            class: 'btn btn-success' %>
+            </td>
+            <td><%= link_to 'Decline',
+                            accept_friend_request_path(value: 'decline', id: f.id),
+                            remote: true,
+                            method: :put,
+                            id: "decline-request-btn-#{f.id}",
+                            class: 'btn btn-danger' %>
+            </td>
           </tr>
         <% end %>
       <% end %>

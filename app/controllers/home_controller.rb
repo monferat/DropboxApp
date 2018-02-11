@@ -3,14 +3,32 @@ class HomeController < ApplicationController
 
   def index
     @users = User.all
+    @users.delete(@user)
     @user_friends = @user.friends
     @requested_friends = @user.requested_friends
     @pending_friends = @user.pending_friends
   end
 
   def friend_request
+    friend = User.find(@id)
+    @user.friend_request(friend)
 
     respond_to do |format|
+      format.js
+    end
+  end
+
+  def accept_friend_request
+    friend = User.find(@id)
+
+    if params[:value] == 'accept'
+      @user.accept_request(friend)
+    else
+      @user.decline_request(friend)
+    end
+
+    respond_to do |format|
+      format.html
       format.js
     end
   end
