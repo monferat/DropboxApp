@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  post 'friend_request', to: 'home#friend_request'
-  put 'accept_friend_request', to: 'home#accept_friend_request'
+  get 'index_friends', to: 'friend#index'
+
+  post 'friend_request', to: 'friend#friend_request'
+  put 'accept_friend_request', to: 'friend#accept_friend_request'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

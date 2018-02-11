@@ -2,27 +2,8 @@
   <div class="row">
     <div class="col-2">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="users-tab" data-toggle="pill" href="#users" role="tab" aria-controls="users" aria-selected="true">All Users</a>
-        <a class="nav-link" id="friends-tab" data-toggle="pill" href="#friends" role="tab" aria-controls="friends" aria-selected="false">Friends</a>
-        <a class="nav-link" id="requests-tab" data-toggle="pill" href="#requests" role="tab" aria-controls="requests" aria-selected="false">Friendship requests</a>
-        <a class="nav-link" id="pending-tab" data-toggle="pill" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending requests</a>
+        <div> <%= link_to 'Users and friends list', index_friends_path, class: 'btn btn-secondary' %> </div>
       </div>
     </div>
-    <div class="col-10">
-      <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="v-pills-users-tab">
-          <%= render 'home/users' %>
-        </div>
-        <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="v-pills-friends-tab">
-          <%= render 'home/friends' %>
-        </div>
-        <div class="tab-pane fade" id="requests" role="tabpanel" aria-labelledby="v-pills-requests-tab">
-          <%= render 'home/requested_friends' %>
-        </div>
-        <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="v-pills-pending-tab">
-          <%= render 'home/pending_friends' %>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 </div>
