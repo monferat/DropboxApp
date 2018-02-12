@@ -34,9 +34,14 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deploymentgit
 # gem 'capistrano-rails', group: :development
 
+# Bootstrap
 gem 'bootstrap', '~> 4.0.0'
 gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped', branch: 'bootstrap4'
 
+# Dropbox Api v2
+gem 'dropbox_api'
+
+# For authentication
 gem 'devise'
 gem 'figaro'
 gem 'omniauth'
