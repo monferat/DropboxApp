@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails_Dropbox App
 
-Things you may want to cover:
+* Ruby version - 2.4.3
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
+* Rails version - 5.1.4
 
 * Database creation
+* - rake db:create
+* - rake db:migrate
 
-* Database initialization
 
-* How to run the test suite
+* Services (Dropbox API, Devise, Bootstrap, ...)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Heroku link: https://limitless-citadel-17244.herokuapp.com
