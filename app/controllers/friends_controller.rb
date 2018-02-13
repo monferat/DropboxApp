@@ -1,4 +1,4 @@
-class FriendController < ApplicationController
+class FriendsController < ApplicationController
   before_action :set_user, :set_user_id, :authenticate_user!
 
   def index
