@@ -1,10 +1,6 @@
 class DropboxController < ApplicationController
   def index; end
 
-  def folders_list
-    @folders = @client_folders
-  end
-
   # GET /dropbox/auth
   def auth
     url = authenticator.authorize_url redirect_uri: redirect_uri
@@ -22,9 +18,8 @@ class DropboxController < ApplicationController
     # If you persist this token, you can use it in subsequent requests or
     # background jobs to perform calls to Dropbox API such as the following.
 
-    @client_folders = DropboxApi::Client.new(token).list_folder '/My_Folder'
+    @folders = DropboxApi::Client.new(token).list_folder '/My_Folder'
 
-    redirect_to dropbox_folders_path
   end
 
   private
