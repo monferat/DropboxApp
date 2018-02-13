@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'index_friends', to: 'friends#index'
 
   get 'index_dropbox', to: 'dropbox#index'
+  get 'dropbox_folders', to: 'dropbox#folders_list'
   get 'dropbox/auth' => 'dropbox#auth'
   get 'dropbox/auth_callback' => 'dropbox#auth_callback'
 
