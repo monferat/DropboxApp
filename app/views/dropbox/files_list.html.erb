@@ -1,0 +1,33 @@
+<div class="bd-example bd-example-tabs">
+  <div class="row">
+    <div class="col-2">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <div> <%= link_to 'Users and friends list', index_friends_path, class: 'btn btn-secondary' %> </div><br>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="v-pills-users-tab">
+    <div class="users-title">
+      <h2>Folders and files</h2>
+    </div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @h.any? %>
+          <% @h.each do |key, value| %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= value %></td>
+                <td><%= link_to 'Download new', value, class: 'btn btn-info' %><td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+</div>

@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_friendship
+
+  has_and_belongs_to_many :dropbox_files
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
