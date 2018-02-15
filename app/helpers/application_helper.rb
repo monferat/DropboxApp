@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def check_friendship?(id)
     friend = User.find(id)
     current_user.friends_with?(friend)
@@ -9,5 +8,9 @@ module ApplicationHelper
     friend = User.find(id)
     friends = current_user.pending_friends
     friends.include?(friend)
+  end
+
+  def find_owner(owner_id)
+    User.find(owner_id)
   end
 end

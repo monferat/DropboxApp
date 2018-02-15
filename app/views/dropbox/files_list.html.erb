@@ -8,6 +8,7 @@
 </div>
 </div>
 
+<div class="col-10">
 <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="v-pills-users-tab">
     <div class="users-title">
       <h2>Folders and files</h2>
@@ -16,18 +17,23 @@
       <thead>
       <tr>
         <th scope="col">Name</th>
+        <th scope="col">Owner</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
-      <% if @h.any? %>
-          <% @h.each do |key, value| %>
+      <% if @user_data_files.any? %>
+          <% @user_data_files.each do |f| %>
               <tr>
-                <td><%= key %></td>
-                <td><%= value %></td>
-                <td><%= link_to 'Download new', value, class: 'btn btn-info' %><td>
+                <td><%= f.name %></td>
+                <td><%= find_owner(f.owner_id).name %></td>
+                <td><%= link_to 'Download', f.link, class: 'btn btn-info' %><td>
+                <td><%= link_to 'Share', f.link, class: 'btn btn-info' %><td>
               </tr>
           <% end %>
       <% end %>
       </tbody>
     </table>
+</div>
 </div>

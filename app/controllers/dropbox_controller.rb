@@ -1,5 +1,6 @@
 class DropboxController < ApplicationController
-  before_action :set_client, only: [:files_list, :download]
+  before_action :set_client, :set_folders, only: [:files_list]
+  before_action :authenticate_user!
 
   def index; end
 
@@ -20,25 +21,29 @@ class DropboxController < ApplicationController
     # If you persist this token, you can use it in subsequent requests or
     # background jobs to perform calls to Dropbox API such as the following.
     client = DropboxApi::Client.new(token)
-
-    @folders = client.list_folder '/folder_13'
   end
 
   def files_list
+    @user_data_files = current_user.dropbox_files
 
-    all_folders = @client.list_folder "/folder_#{current_user.id}"
-    @user_folders = all_folders.entries
-
-    @h = Hash.new
-    @user_folders.each do |f|
-      file_link = @client.get_temporary_link(f.path_lower)
-      @h[f.name] = file_link.to_s
+    @user_data_files.each do |f|
+      f.singleton_class.instance_eval { attr_accessor :link }
+      f.link = get_download_link(f.fid)
     end
-
-    # @links = @client.get_temporary_link "/folder_13/glauber_2d.cpp"
   end
 
   private
+
+  def get_download_link(file_id)
+    data_file = @user_folders.find { |f| f.id == file_id }
+    file_link = @client.get_temporary_link(data_file.path_lower)
+    file_link.link
+  end
+
+  def set_folders
+    data_folders = @client.list_folder "/folder_#{current_user.id}"
+    @user_folders = data_folders.entries
+  end
 
   def set_client
     @client = DropboxApi::Client.new(ENV['DROPBOX_OAUTH_BEARER'])
