@@ -8,7 +8,7 @@
     </div>
 <% end %>
 
-<div class = "well">
+<div class = "form-group">
   <%= form_for @dropbox_file, html: { multipart: true } do |f| %>
       <%= f.label 'File' %>
       <%= f.file_field :attachment %>

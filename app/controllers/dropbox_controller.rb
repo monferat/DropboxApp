@@ -43,9 +43,7 @@ class DropboxController < ApplicationController
   end
 
   def set_folders
-    @client = set_client
-    data_folders = @client.list_folder "/folder_#{current_user.id}"
-    @user_folders = data_folders.entries
+    @user_folders = get_client_files
   end
 
   def authenticator

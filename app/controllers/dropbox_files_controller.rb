@@ -16,10 +16,14 @@ class DropboxFilesController < ApplicationController
 
   def destroy
     @dropbox_file = DropboxFile.find(params[:id])
+    delete_from_dropbox(@dropbox_file)
     @dropbox_file.destroy
     redirect_to dropbox_files_list_path, notice: 'The file has been deleted.'
   end
 
+  private
+
+  # Upload to dropbox
   def upload_file(dropbox_file)
     @client = set_client
 
@@ -34,10 +38,15 @@ class DropboxFilesController < ApplicationController
     dropbox_file.fid = data_file.id
     dropbox_file.save
 
-    File.delete(dropbox_file.dropbox_file.attachment.current_path)
+    File.delete(dropbox_file.attachment.current_path)
   end
 
-  private
+  def delete_from_dropbox(client_file)
+    client_files = get_client_files
+    @client = set_client
+    data_file = client_files.find { |f| f.id == client_file.fid }
+    @client.delete(data_file.path_lower) unless data_file.nil?
+  end
 
   def dropbox_file_params
     params.require(:dropbox_file).permit(:attachment)
