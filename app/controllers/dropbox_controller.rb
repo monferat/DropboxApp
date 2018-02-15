@@ -1,5 +1,5 @@
 class DropboxController < ApplicationController
-  before_action :set_client, :set_folders, only: [:files_list]
+  before_action :set_folders, only: [:files_list, :get_download_link]
   before_action :authenticate_user!
 
   def index; end
@@ -7,7 +7,6 @@ class DropboxController < ApplicationController
   # GET /dropbox/auth
   def auth
     url = authenticator.authorize_url redirect_uri: redirect_uri
-
     redirect_to url
   end
 
@@ -35,18 +34,18 @@ class DropboxController < ApplicationController
   private
 
   def get_download_link(file_id)
+    @client = set_client
     data_file = @user_folders.find { |f| f.id == file_id }
-    file_link = @client.get_temporary_link(data_file.path_lower)
-    file_link.link
+    unless data_file.nil?
+      file_link = @client.get_temporary_link(data_file.path_lower)
+      file_link.link
+    end
   end
 
   def set_folders
+    @client = set_client
     data_folders = @client.list_folder "/folder_#{current_user.id}"
     @user_folders = data_folders.entries
-  end
-
-  def set_client
-    @client = DropboxApi::Client.new(ENV['DROPBOX_OAUTH_BEARER'])
   end
 
   def authenticator

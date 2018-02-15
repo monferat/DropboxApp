@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214083534) do
+ActiveRecord::Schema.define(version: 20180215131403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180214083534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "fid"
+    t.string "attachment"
   end
 
   create_table "dropbox_files_users", id: false, force: :cascade do |t|

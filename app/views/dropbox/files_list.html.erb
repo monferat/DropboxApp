@@ -8,6 +8,8 @@
 </div>
 </div>
 
+<div class="add-file-button"><%= link_to "Add File", new_dropbox_file_path, class: "btn btn-primary" %></div>
+
 <div class="col-10">
 <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="v-pills-users-tab">
     <div class="users-title">
@@ -18,8 +20,10 @@
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Owner</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
       </tr>
       </thead>
       <tbody>
@@ -30,6 +34,8 @@
                 <td><%= find_owner(f.owner_id).name %></td>
                 <td><%= link_to 'Download', f.link, class: 'btn btn-info' %><td>
                 <td><%= link_to 'Share', f.link, class: 'btn btn-info' %><td>
+                <td><div class="btn btn-info">Preview</div></td>
+                <td><%= link_to 'Delete', f, method: :delete, class: 'btn btn-danger', confirm: "Are you sure that you wish to delete #{f.name}?" %></td>
               </tr>
           <% end %>
       <% end %>

@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+
+  resources :dropbox_files, only: [:new, :create, :destroy]
+
   root to: 'home#index'
 
   get 'index_friends', to: 'friends#index'
 
   get 'index_dropbox', to: 'dropbox#index'
-  get 'dropbox_files', to: 'dropbox#files_list'
+  get 'dropbox_files_list', to: 'dropbox#files_list'
 
   get 'dropbox/auth' => 'dropbox#auth'
   get 'dropbox/auth_callback' => 'dropbox#auth_callback'
