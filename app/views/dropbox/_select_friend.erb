@@ -1,19 +1,17 @@
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <%= link_to 'Share with', share_file_path(:file_id, file_id),
+    <%= link_to 'Share with', share_file_path(share_file_id: share_file_id),
                 remote: true,
                 method: :put,
                 class: 'btn btn-outline-secondary' %>
-    <button id="file-share-btn-<%=file_id%>" class="btn btn-secondary" type="button">Button</button>
   </div>
-  <div class="row-fluid">
-    <%= select_tag :share_file,
-                   options_from_collection_for_select(current_user.friends, :id, :name), prompt: 'Choose..',
-                   class: 'custom-select',
-                   'data-live-search' => 'true' %>
+
+  <button id="file-share-btn-<%=share_file_id%>" class="btn btn-secondary" type="button">Button</button>
+
+  <div>
+    <%= select_tag "share_#{share_file_id}",
+                   options_from_collection_for_select(current_user.friends, :id, :name), promt: 'Choose...',
+                   class: 'custom-select'%>
   </div>
+
 </div>
-
-
-
-
