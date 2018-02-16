@@ -1,5 +1,4 @@
 class DropboxController < ApplicationController
-  before_action :set_folders, only: [:files_list, :get_download_link]
   before_action :authenticate_user!
 
   def index; end
@@ -27,23 +26,20 @@ class DropboxController < ApplicationController
 
     @user_data_files.each do |f|
       f.singleton_class.instance_eval { attr_accessor :link }
-      f.link = get_download_link(f.fid)
+      f.link = get_download_link(f.fid, f.owner_id)
     end
   end
 
   private
 
-  def get_download_link(file_id)
+  def get_download_link(file_id, owner_id)
     @client = set_client
+    @user_folders = get_client_files(owner_id)
     data_file = @user_folders.find { |f| f.id == file_id }
     unless data_file.nil?
       file_link = @client.get_temporary_link(data_file.path_lower)
       file_link.link
     end
-  end
-
-  def set_folders
-    @user_folders = get_client_files
   end
 
   def authenticator

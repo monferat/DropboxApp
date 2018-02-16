@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
     @client = DropboxApi::Client.new(ENV['DROPBOX_OAUTH_BEARER'])
   end
 
-  def get_client_files
+  def get_client_files(id)
     @client = set_client
-    data_folders = @client.list_folder "/folder_#{current_user.id}"
+    data_folders = @client.list_folder "/folder_#{id}"
     data_folders.entries
   end
 

@@ -15,10 +15,14 @@ class DropboxFilesController < ApplicationController
   end
 
   def destroy
-    @dropbox_file = DropboxFile.find(params[:id])
-    delete_from_dropbox(@dropbox_file)
-    @dropbox_file.destroy
-    redirect_to dropbox_files_list_path, notice: 'The file has been deleted.'
+    if @dropbox_file.owner_id == current_user.id
+      @dropbox_file = DropboxFile.find(params[:id])
+      delete_from_dropbox(@dropbox_file)
+      @dropbox_file.destroy
+      redirect_to dropbox_files_list_path, notice: 'The file has been deleted.'
+    else
+      redirect_to dropbox_files_list_path, notice: 'You are not file owner'
+    end
   end
 
   private
@@ -42,7 +46,7 @@ class DropboxFilesController < ApplicationController
   end
 
   def delete_from_dropbox(client_file)
-    client_files = get_client_files
+    client_files = get_client_files(client_file.owner_id)
     @client = set_client
     data_file = client_files.find { |f| f.id == client_file.fid }
     @client.delete(data_file.path_lower) unless data_file.nil?
