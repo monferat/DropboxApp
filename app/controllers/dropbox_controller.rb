@@ -30,6 +30,13 @@ class DropboxController < ApplicationController
     end
   end
 
+  def share_file
+    @file_id = params[:file_id]
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def get_download_link(file_id, owner_id)
