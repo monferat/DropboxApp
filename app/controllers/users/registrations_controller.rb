@@ -10,9 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    User.create_folder(current_user.id)
+  end
 
   # GET /resource/edit
   # def edit

@@ -20,8 +20,13 @@ class User < ApplicationRecord
           password: Devise.friendly_token[0, 20]
       )
     end
-
+    User.create_folder(user.id)
     user
+  end
+
+  def self.create_folder(id)
+    client = DropboxApi::Client.new(ENV['DROPBOX_OAUTH_BEARER'])
+    client.create_folder "/folder_#{id}"
   end
 
   private
