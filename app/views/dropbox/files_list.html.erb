@@ -20,6 +20,7 @@
         <th scope="col">Owner</th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
         <th scope="col">Share file with friend</th>
         <th scope="col"></th>
         <th scope="col">Preview</th>
@@ -32,7 +33,8 @@
               <tr>
                 <td><%= f.name %></td>
                 <td><%= find_owner(f.owner_id).name %></td>
-                <td><%= link_to 'Download', f.link, class: 'btn btn-info' %><td>
+                <td><%= link_to 'Download', download_client_file_path(file_id: f.fid, owner_id: f.owner_id), class: 'btn btn-info' %><td>
+                <td><%= link_to 'Tmp link', f.link, class: 'btn btn-info' %><td>
                 <td><%= render 'select_friend', share_file_id: f.id %><td>
                 <td><div class="btn btn-info">Preview</div></td>
                 <% if f.owner_id == current_user.id %>

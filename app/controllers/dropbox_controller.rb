@@ -47,6 +47,24 @@ class DropboxController < ApplicationController
     end
   end
 
+  def download_client_file
+    @client = set_client
+    @user_folders = get_client_files(params[:owner_id])
+
+    data_file = @user_folders.find { |f| f.id == params[:file_id] }
+    file_path = "#{Rails.root}/public/#{data_file.name}"
+
+    file = File.open(file_path, "w+b")
+    unless data_file.nil?
+      @client.download data_file.path_lower do
+        |content| file.write content
+      end
+      file.close
+      send_file file_path, disposition: 'attachment'
+    end
+
+  end
+
   private
 
   def get_download_link(file_id, owner_id)

@@ -15,8 +15,8 @@ class DropboxFilesController < ApplicationController
   end
 
   def destroy
+    @dropbox_file = DropboxFile.find(params[:id])
     if @dropbox_file.owner_id == current_user.id
-      @dropbox_file = DropboxFile.find(params[:id])
       delete_from_dropbox(@dropbox_file)
       @dropbox_file.destroy
       redirect_to dropbox_files_list_path, notice: 'The file has been deleted.'
