@@ -33,7 +33,7 @@
                 <td><%= f.name %></td>
                 <td><%= find_owner(f.owner_id).name %></td>
                 <td><%= link_to 'Download', f.link, class: 'btn btn-info' %><td>
-                <td><%= render 'select_friend', file_id: f.id %><td>
+                <td><%= render 'select_friend', share_file_id: f.id %><td>
                 <td><div class="btn btn-info">Preview</div></td>
                 <% if f.owner_id == current_user.id %>
                     <td><%= link_to 'Delete', f, method: :delete, class: 'btn btn-danger', confirm: "Are you sure that you wish to delete #{f.name}?" %></td>

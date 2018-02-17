@@ -31,9 +31,19 @@ class DropboxController < ApplicationController
   end
 
   def share_file
-    @file_id = params[:file_id]
-    respond_to do |format|
-      format.js
+    unless params[:friend_id].empty?
+      @file_id = params[:share_file_id]
+
+      friend = User.find(params[:friend_id])
+      common_file = DropboxFile.find(@file_id)
+
+      if friend.dropbox_files.include? common_file
+        @msg = 'Already shared'
+      else
+        friend.dropbox_files << common_file
+        @msg = 'Shared'
+      end
+      respond_to { |format| format.js }
     end
   end
 

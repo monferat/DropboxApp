@@ -1,17 +1,18 @@
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <%= link_to 'Share with', share_file_path(share_file_id: share_file_id),
-                remote: true,
-                method: :put,
-                class: 'btn btn-outline-secondary' %>
-  </div>
+<div>
+  <%= form_tag share_file_path(share_file_id: share_file_id), method: :get, id: 'limit_form', remote: true do %>
 
-  <button id="file-share-btn-<%=share_file_id%>" class="btn btn-secondary" type="button">Button</button>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <%= submit_tag 'Share with', name: nil, class: 'btn btn-outline-secondary' %>
+      </div>
 
-  <div>
-    <%= select_tag "share_#{share_file_id}",
-                   options_from_collection_for_select(current_user.friends, :id, :name), promt: 'Choose...',
-                   class: 'custom-select'%>
-  </div>
+      <div>
+        <%= select_tag 'friend_id', options_from_collection_for_select(current_user.friends, :id, :name),
+                       prompt: 'Choose...',
+                       class: 'custom-select' %>
+      </div>
+      <div id="file-share-<%=share_file_id%>" class="input-group-text"></div>
+    </div>
 
+  <% end %>
 </div>

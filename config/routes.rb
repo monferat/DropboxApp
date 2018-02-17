@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post 'friend_request', to: 'friends#friend_request'
   put 'accept_friend_request', to: 'friends#accept_friend_request'
 
-  put 'share_file', to: 'dropbox#share_file'
+  get 'share_file', to: 'dropbox#share_file'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
