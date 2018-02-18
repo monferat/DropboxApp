@@ -48,10 +48,7 @@ class DropboxController < ApplicationController
   end
 
   def download_client_file
-    @client = set_client
-    @user_folders = get_client_files(params[:owner_id])
-
-    data_file = @user_folders.find { |f| f.id == params[:file_id] }
+    data_file = get_dropbox_file(params[:file_id], params[:owner_id])
     file_path = "#{Rails.root}/public/#{data_file.name}"
 
     file = File.open(file_path, "w+b")
@@ -68,13 +65,17 @@ class DropboxController < ApplicationController
   private
 
   def get_download_link(file_id, owner_id)
-    @client = set_client
-    @user_folders = get_client_files(owner_id)
-    data_file = @user_folders.find { |f| f.id == file_id }
+    data_file = get_dropbox_file(file_id, owner_id)
     unless data_file.nil?
       file_link = @client.get_temporary_link(data_file.path_lower)
       file_link.link
     end
+  end
+
+  def get_dropbox_file(file_id, owner_id)
+    @client = set_client
+    @user_folders = get_client_files(owner_id)
+    data_file = @user_folders.find { |f| f.id == file_id }
   end
 
   def authenticator
