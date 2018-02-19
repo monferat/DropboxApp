@@ -11,6 +11,11 @@ Rails_Dropbox App
 * - rake db:migrate
 
 
-* Services (Dropbox API, Devise, Bootstrap, ...)
+* Services: 
+  + Dropbox API v2 (https://github.com/Jesus/dropbox_api)
+  + Devise
+  + Bootstrap 4
+  + OAuth
+  + ...
 
 Heroku link: https://limitless-citadel-17244.herokuapp.com
