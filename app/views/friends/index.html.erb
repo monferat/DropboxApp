@@ -3,21 +3,26 @@
   <div class="row">
     <div class="col-2">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="users-tab" data-toggle="pill" href="#users" role="tab" aria-controls="users" aria-selected="true">All Users</a>
-        <a class="nav-link" id="friends-tab" data-toggle="pill" href="#friends" role="tab" aria-controls="friends" aria-selected="false">Friends</a>
-        <a class="nav-link" id="requests-tab" data-toggle="pill" href="#requests" role="tab" aria-controls="requests" aria-selected="false">Friendship requests</a>
-        <a class="nav-link" id="pending-tab" data-toggle="pill" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending requests</a>
+        <%= link_to 'All Users', show_path(tab_name: 'users'), remote: true, class: 'nav-link active', toggle: 'tab', target: 'users', 'data-toggle' => 'pill'%>
+        <%= link_to 'Friends', show_path(tab_name: 'friends'), remote: true, class: 'nav-link', toggle: 'tab', target: 'friends', 'data-toggle' => 'pill' %>
+        <%= link_to 'Friendship requests', show_path(tab_name: 'requested_friends'), remote: true, class: 'nav-link', toggle: 'tab', target: 'requested_friends', 'data-toggle' => 'pill' %>
+        <%= link_to 'Pending requests', show_path(tab_name: 'pending_friends'), remote: true, class: 'nav-link', toggle: 'tab', target: 'pending_friends', 'data-toggle' => 'pill' %>
       </div>
     </div>
     <div class="col-10">
       <div class="tab-content" id="v-pills-tabContent">
-          <%= render 'friends/users' %>
+        <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="v-pills-users-tab">
+          <%= render 'friends/users'%>
+        </div>
 
-          <%= render 'friends/friends' %>
+        <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="v-pills-friends-tab">
+        </div>
 
-          <%= render 'friends/requested_friends' %>
+        <div class="tab-pane fade" id="requested_friends" role="tabpanel" aria-labelledby="v-pills-requests-tab">
+        </div>
 
-          <%= render 'friends/pending_friends' %>
+        <div class="tab-pane fade" id="pending_friends" role="tabpanel" aria-labelledby="v-pills-pending-tab">
+        </div>
       </div>
     </div>
   </div>
