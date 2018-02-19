@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'index_dropbox', to: 'dropbox#index'
   get 'dropbox_files_list', to: 'dropbox#files_list'
   get 'dropbox/download_client_file', as: :download_client_file
+  get 'dropbox/share_file_link', as: :share_file_link
 
   get 'dropbox/auth' => 'dropbox#auth'
   get 'dropbox/auth_callback' => 'dropbox#auth_callback'

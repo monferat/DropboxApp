@@ -24,10 +24,10 @@ class DropboxController < ApplicationController
   def files_list
     @user_data_files = current_user.dropbox_files
 
-    @user_data_files.each do |f|
-      f.singleton_class.instance_eval { attr_accessor :link }
-      f.link = get_download_link(f.fid, f.owner_id)
-    end
+    # @user_data_files.each do |f|
+    #   f.singleton_class.instance_eval { attr_accessor :link }
+    #   f.link = get_download_link(f.fid, f.owner_id)
+    # end
   end
 
   def share_file
@@ -59,7 +59,18 @@ class DropboxController < ApplicationController
       file.close
       send_file file_path, disposition: 'attachment'
     end
+  end
 
+  def share_file_link
+    @client = set_client
+    share_file_links = @client.list_shared_links
+    share_link = share_file_links.links.find{ |f| f.id == params[:file_id] }
+    if share_link.nil?
+      @user_folders = get_client_files(params[:owner_id])
+      data_file = @user_folders.find { |f| f.id == params[:file_id] }
+      share_link = @client.create_shared_link_with_settings data_file.path_lower
+    end
+    redirect_to share_link.url
   end
 
   private
