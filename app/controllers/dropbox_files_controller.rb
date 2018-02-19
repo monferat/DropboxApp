@@ -6,11 +6,15 @@ class DropboxFilesController < ApplicationController
   end
 
   def create
-    @dropbox_file = DropboxFile.new(dropbox_file_params)
-    @dropbox_file.name = @dropbox_file.attachment.identifier
-    if @dropbox_file.save
-      upload_file(@dropbox_file)
-      redirect_to dropbox_files_list_path, notice: 'The file has been uploaded.'
+    if params[:attachment]
+      @dropbox_file = DropboxFile.new(dropbox_file_params)
+      @dropbox_file.name = @dropbox_file.attachment.identifier
+      if @dropbox_file.save
+        upload_file(@dropbox_file)
+        redirect_to dropbox_files_list_path, notice: 'The file has been uploaded.'
+      end
+    else
+      redirect_to new_dropbox_file_path, notice: 'No file selected.'
     end
   end
 

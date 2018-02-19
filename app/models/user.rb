@@ -19,8 +19,8 @@ class User < ApplicationRecord
           email: User.get_email(auth),
           password: Devise.friendly_token[0, 20]
       )
+      User.create_folder(user.id)
     end
-    User.create_folder(user.id)
     user
   end
 
