@@ -49,7 +49,7 @@ class DropboxController < ApplicationController
 
   def download_client_file
     data_file = get_dropbox_file(params[:file_id], params[:owner_id])
-    file_path = "#{Rails.root}/public/#{data_file.name}"
+    file_path = "#{Rails.root}/public/tmp/#{data_file.name}"
 
     file = File.open(file_path, "w+b")
     unless data_file.nil?
